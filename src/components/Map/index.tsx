@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
 import { YMaps, Map } from 'react-yandex-maps';
 
