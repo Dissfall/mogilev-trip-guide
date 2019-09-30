@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -13,44 +13,45 @@ import SwapCallsIcon from '@material-ui/icons/SwapCalls';
 
 import './style.css';
 
-const useStyles = makeStyles(theme => ({
-  menuRoot: {
-    width: '100%',
-    position: 'absolute',
-    bottom: '0px',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  menuContainer: {
-    backgroundColor: theme.palette.background.paper,
-    position: 'static',
-    // width: '30%',
-    height: '5vw',
-    margin: '15px',
-    borderRadius: '120px'
+
+class MenuBar extends Component <MBProps, MBState> {
+  constructor(props: MBProps) {
+    super(props);
+
+    this.state = { tab: 1 };
   }
-}));
 
-function PaperSheet() {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.menuRoot}>
-      <Paper className={classes.menuContainer}>
-        <Tabs
-          value={React.useState(0)}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="action tabs example"
-        >
-          <Tab icon={<BookmarksIcon />} />
-          <Tab icon={<MapIcon />} />
-          <Tab icon={<SwapCallsIcon />} />
-        </Tabs>
-      </Paper>
-    </div>
-  );
+  render() {
+    return (
+      <div className="menu-root">
+        <Paper className="menu-container">
+          <Tabs
+            value={this.state.tab}
+            onChange={(event: any, tab: number) => {
+              this.setState({ tab: tab });
+              this.props.onChange ? this.props.onChange(tab) : (() => {})();
+            }}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+          >
+            <Tab icon={<BookmarksIcon />} />
+            <Tab icon={<MapIcon />} />
+            <Tab icon={<SwapCallsIcon />} />
+          </Tabs>
+        </Paper>
+      </div>
+    );
+  }
 }
 
-export default PaperSheet;
+interface MBProps {
+  currentTab?: string
+  onChange?: any
+};
+
+interface MBState {
+  tab: number
+}
+
+export default MenuBar;

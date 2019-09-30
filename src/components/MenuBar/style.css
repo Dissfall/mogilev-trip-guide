@@ -1,3 +1,14 @@
-.container {
-  border-radius: 100px;
-}
+  .menu-root {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu-container {
+    position: static;
+    height: 5vw;
+    margin: 15px;
+    border-radius: 120px;
+  }
