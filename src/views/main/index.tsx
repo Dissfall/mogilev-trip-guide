@@ -3,6 +3,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import Map from '../../components/Map';
 import MenuBar from '../../components/MenuBar';
+import TripsScreen from '../../components/TripsScreen';
 
 
 class Main extends Component <MVProps, MVState> {
@@ -24,10 +25,14 @@ class Main extends Component <MVProps, MVState> {
         <SwipeableViews
           axis="x"
           index={this.state.tab}
+          ignoreNativeScroll={true}
+          onChangeIndex={this.handleNavigationTabChange}
         >
           <div></div>
-          <Map />
-          <div></div>
+            <Map />
+          <div style={{ height: "92vh" }}>
+            <TripsScreen />
+          </div>
         </SwipeableViews>
         <MenuBar onChange={ this.handleNavigationTabChange }/>
       </div>
