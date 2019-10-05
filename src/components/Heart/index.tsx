@@ -45,7 +45,6 @@ class Heart extends Component <HeartProps, { liked: boolean }> {
 
   private toggleHover = () => {
     this.setState({ liked: !this.state.liked });
-    console.log(this.state.liked);
   }
 
   render() {
