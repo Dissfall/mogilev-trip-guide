@@ -17,7 +17,6 @@ const MDL: number = 50;
 class TripCard extends Component <TCProps> {
   render() {
     let { name, image, description, time, distance, placesNumber, likes } = this.props;
-    description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
     if (this.props.image && this.props.time) {
       console.warn('"time" and "image" props passed to card, but only one can be displayed. Image preferenced.');
@@ -25,7 +24,7 @@ class TripCard extends Component <TCProps> {
     }
 
     return (
-      <Card withdescription >
+      <Card withdescription={ !!description } >
         { image && ( <TripImage image={ image } /> )}
         { time && ( <TripTime>{ time }</TripTime> )}
         <CardInfoContainer name={name} description={description} distance={distance} places={placesNumber} likes={likes} />
