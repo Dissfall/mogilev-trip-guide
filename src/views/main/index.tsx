@@ -11,7 +11,8 @@ class Main extends Component <MVProps, MVState> {
     super(props);
 
     this.state = {
-      tab: 1 
+      tab: 1,
+      tripView: 0
     }
   }
 
@@ -19,29 +20,42 @@ class Main extends Component <MVProps, MVState> {
     this.setState({ tab: tab });
   }
 
+  private changeTripView = () => {
+    this.setState({ tripView: (() => 1 - this.state.tripView )() });
+  }
+
   render() {
     return (
-      <div>
-        <SwipeableViews
-          axis="x"
-          index={this.state.tab}
-          ignoreNativeScroll={true}
-          onChangeIndex={this.handleNavigationTabChange}
-        >
-          <div></div>
-            <Map />
-          <div style={{ height: "92vh" }}>
-            <TripsScreen />
-          </div>
-        </SwipeableViews>
-        <MenuBar onChange={ this.handleNavigationTabChange }/>
-      </div>
+      <SwipeableViews
+        axis="x"
+        index={this.state.tripView}
+      >
+        <div style={{ height: '100vh' }}>
+          <SwipeableViews
+            axis="x"
+            index={this.state.tab}
+            ignoreNativeScroll={true}
+            onChangeIndex={this.handleNavigationTabChange}
+          >
+            <div></div>
+              <Map />
+            <div style={{ height: "92vh" }}>
+              <TripsScreen onTripSelect={ this.changeTripView } />
+            </div>
+          </SwipeableViews>
+          <MenuBar onChange={ this.handleNavigationTabChange }/>
+        </div>
+        <div>
+          <button onClick={ this.changeTripView }>back</button>
+        </div>
+      </SwipeableViews>
     )
   }
 }
 
 interface MVState {
   tab: number
+  tripView: number
 }
 
 interface MVProps {};
